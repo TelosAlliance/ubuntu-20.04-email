@@ -6,12 +6,9 @@ ENV TZ America/New_York
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
-RUN /bin/bash <<EOF
-apt-get update
-apt-get install -y ssmtp
-apt-get clean
-rm -rf /var/lib/apt/lists/*
-EOF
+RUN apt-get update && apt-get install -y ssmtp \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
