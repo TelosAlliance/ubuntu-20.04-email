@@ -1,0 +1,13 @@
+#!/bin/bash
+docker_container_name="ghcr.io/telosalliance/ubuntu-20.04-email:latest"
+
+docker run --privileged -it \
+    --rm \
+    --env LINUX_USER="$(id -un)" \
+    --env LINUX_UID="$(id -u)" \
+    --env LINUX_GROUP="$(id -gn)" \
+    --env LINUX_GID="$(id -g)" \
+    --env LINUX_DIR="$PWD" \
+    --mount "src=$HOME,target=$HOME,type=bind" \
+    ${docker_container_name} "/bin/bash"
+
